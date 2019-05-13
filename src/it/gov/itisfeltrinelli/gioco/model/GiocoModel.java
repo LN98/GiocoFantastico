@@ -12,6 +12,7 @@ public class GiocoModel {
 	public void startGame() {
 		numeroSegreto=(int)(Math.random()*maxNumero)+1;
 		inGame=true;
+		tentativi=0;
 	}
 	/**
 	 * 
@@ -39,6 +40,7 @@ public class GiocoModel {
 		} 
 		return -1;
 	}
+	
 	public int getTentativi() {
 		return tentativi;
 	}

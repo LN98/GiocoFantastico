@@ -6,13 +6,15 @@ package it.gov.itisfeltrinelli.gioco.gui;
 
 import java.net.URL;
 import java.util.ResourceBundle;
+
+import it.gov.itisfeltrinelli.gioco.model.GiocoModel;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 
 public class GiocoController {
-
+	GiocoModel gioco =new GiocoModel();
     @FXML // ResourceBundle that was given to the FXMLLoader
     private ResourceBundle resources;
 
@@ -36,11 +38,41 @@ public class GiocoController {
 
     @FXML
     void onIndovina(ActionEvent event) {
-
+    	int control=0;
+    	try {
+    		control =gioco.controlla(Integer.parseInt(txtNumero.getText()));
+    	
+    	}catch(Exception e) {
+    		txtStatus.setText("inserisci un numero");
+    	}
+    	if(control==-2) {
+    		txtStatus.setText("Fuori range");
+    	}
+    	
+    	if(control==-1) {
+    		txtStatus.setText("errore");
+    	}
+    	
+    	if(control==0) {
+    		txtStatus.setText("hai indovinato");
+    	}
+    	
+    	if(control==1) {
+    		txtStatus.setText("troppo piccolo");
+    	}
+    	
+    	if(control==2) {
+    		txtStatus.setText("troppo grande");
+    	}
+    	
+    	txtTentativi.setText(gioco.getTentativi()+"");
+    	
     }
 
     @FXML
     void onStart(ActionEvent event) {
+    	gioco.startGame();
+    	txtTentativi.setText(gioco.getTentativi()+"");
     	
     }
 
